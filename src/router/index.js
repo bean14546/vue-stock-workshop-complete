@@ -1,24 +1,52 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
+import Login from "../views/Authentication/Login.vue";
+import Register from '../views/Authentication/Register.vue';
+import Stock from '../views/Stock/Stock.vue';
+import StockCreate from '../views/Stock/StockCreate.vue';
+import StockEdit from '../views/Stock/StockEdit.vue';
+import Report from '../views/Report/Report.vue';
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/register",
+    name: "Register",
+    component: Register
   },
+  {
+    path: "/stock",
+    name: "Stock",
+    component: Stock
+  },
+  {
+    path: "/stockcreate",
+    name: "StockCreate",
+    component: StockCreate
+  },
+  {
+    path: "/stockedit/:id",//อะไรก็ตามที่อยู่หลัง : จะเป็น paramiter
+    name: "StockEdit",
+    component: StockEdit
+  },
+  {
+    path: "/report",
+    name: "Report",
+    component: Report
+  },
+  {
+    path: "/",// หาก path ที่ใส่มา เป็น / จะ redirect เป็น /login อัตโนมัต
+    redirect:"/login"
+  },
+  {
+    path: "*",// หาก path ที่ใส่มา ไม่ตรงกับกรณีไหนเลยในด้านบน จะ redirect เป็น /login อัตโนมัต
+    redirect:"login"
+  }
 ];
 
 const router = new VueRouter({
