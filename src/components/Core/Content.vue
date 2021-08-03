@@ -1,8 +1,9 @@
 <template>
   <div id="content_for_root">
-    <v-content>
+    <v-main>
+      <!-- ตาม document ของ vuetify กำหนดให้ router-view อยู่ภายใต้ v-main  -->
       <router-view></router-view>
-    </v-content>
+    </v-main>
   </div>
 </template>
 

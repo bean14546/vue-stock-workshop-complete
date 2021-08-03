@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <!--root component ต้องมี v-app เพื่อใน vuetify render component ได้ -->
+    <!--root component ต้องมี v-app เพื่อให้ vuetify render component ได้ -->
     <v-app> 
       <Header />
-      <Menu />
       <Content />
+      <Menu />
+      
     </v-app>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div id="stockcreate">
-    
+    <h1>StockCreate</h1>
   </div>
 </template>
 
