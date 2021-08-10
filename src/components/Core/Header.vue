@@ -1,6 +1,6 @@
 <template>
   <div id="header_for_root">
-    <v-app-bar color="primary" app dense dark> 
+    <v-app-bar color="success" app dense dark> 
       <!-- ต้องใส่ prop app เพื่อผูกตัวนี้กับ  v-app ใน App.vue จะได้ไม่โดน side บัง -->
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -8,8 +8,9 @@
 
       <v-spacer></v-spacer>
 
-      <span class="mr-2">Username</span>
-      <v-btn icon>
+      <span class="mr-2">{{$store.getters["username"] | capitalize}}</span>
+      <!-- | capitalize เป็นการเรียกใช้ lib ของ filters  -->
+      <v-btn icon @click="onClickLogOff">
         <v-icon>mdi-export</v-icon>
       </v-btn>
     </v-app-bar>
@@ -24,6 +25,11 @@ export default {
       return "1.0"
     }
   },
+  methods: {
+      onClickLogOff(){
+        this.$store.dispatch("doLogout")
+      }
+    },
 };
 </script>
 

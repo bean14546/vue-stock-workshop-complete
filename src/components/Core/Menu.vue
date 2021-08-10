@@ -15,9 +15,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-tile-title>
-                {{ item.nameComponent }}
-              </v-list-tile-title>
+                {{ item.name }}
             </v-list-item-content>
 
           </v-list-item>
@@ -36,17 +34,17 @@ export default {
       menus: [
         {
           icon: "mdi-apps-box",
-          nameComponent: "Stock",
+          name: "Stock",
           path: "/stock",
         },
         {
           icon: "mdi-chart-areaspline",
-          nameComponent: "Report",
+          name: "Report",
           path: "/report",
         },
         {
           icon: " mdi-text-box-check-outline",
-          nameComponent: "About",
+          name: "About",
           path: "/about",
         },
       ],

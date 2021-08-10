@@ -1,6 +1,6 @@
 <template>
   <div id="report">
-     <v-container><v-row><v-col><h1>gggfasdfsdfasdfdsfasdfsdfasdfasdfsadf</h1></v-col></v-row></v-container>
+     <v-container><h1>Report</h1></v-container>
   </div>
 </template>
 
