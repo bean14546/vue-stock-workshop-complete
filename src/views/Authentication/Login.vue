@@ -70,7 +70,7 @@ export default {
         password:this.account.password
       }
       this.$store.dispatch("doLogin",submit)
-      this.$router.push("/report")
+      this.$router.push("/stock")
     }
   }
 };
