@@ -29,7 +29,7 @@ const routes = [{
     component: StockCreate
   },
   {
-    path: "/stockedit/:id", //อะไรก็ตามที่อยู่หลัง : จะเป็น paramiter
+    path: "/stock-edit/:id", //อะไรก็ตามที่อยู่หลัง : จะเป็น paramiter
     name: "StockEdit",
     component: StockEdit
   },

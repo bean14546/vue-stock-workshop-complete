@@ -58,7 +58,7 @@
               <v-spacer></v-spacer>
               <v-btn
                 @click="$router.push('/stockcreate')"
-                color="primary"
+                color="success"
                 dark
                 class="mb-2"
               >
@@ -85,7 +85,7 @@
                 {{ item.stock | number("0,0") }} pcs.
               </td>
               <td class="text-xs-right">
-                <v-icon class="mr-2">edit</v-icon>
+                <v-icon class="mr-2" @click="editItem(item)">edit</v-icon>
                 <span class="ma-1"></span>
                 <v-icon>delete</v-icon>
               </td>
@@ -104,6 +104,11 @@ export default {
   name: "Stock",
   components: {
     StockCard,
+  },
+  mounted() {
+    axios.get("http://localhost:8081/api/v2/product").then((result) => {
+      this.mDataArray = result.data;
+    });
   },
   data() {
     return {
@@ -124,10 +129,10 @@ export default {
       ],
     };
   },
-  mounted() {
-    axios.get("http://localhost:8081/api/v2/product").then((result) => {
-      this.mDataArray = result.data;
-    });
+  methods: {
+    editItem(item){
+      this.$router.push(`/stock-edit/${item.id}`)
+    }
   },
 };
 </script>
