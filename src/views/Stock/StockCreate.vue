@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import api from "@/services/api";
 export default {
   name: "Stockcreate",
   data() {
@@ -75,8 +76,21 @@ export default {
       reader.readAsDataURL(event.target.files[0]);
       this.product.image = event.target.files[0];
     },
-    submit() {
-      alert(JSON.stringify(this.product));
+    async submit() {
+      try {
+        let formData = new FormData();
+        const { name, price, stock } = this.product;
+        formData.append("name", name);
+        formData.append("price", price);
+        formData.append("stock", stock);
+        formData.append("image", this.product.image);
+        await api.addProduct(formData);
+        alert("Complete!!!")
+        this.$router.back();
+        
+      } catch (error) {
+        console.log(error);
+      }
     },
     cancle() {
       this.$router.back();
@@ -85,5 +99,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

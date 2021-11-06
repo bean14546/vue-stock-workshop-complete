@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import api from "@/services/api"
 export default {
   name: "Login",
   data(){
@@ -55,6 +56,11 @@ export default {
         username:"",
         password:""
       }
+    }
+  },
+  mounted() {
+    if(api.isLoggedIn()){
+      this.$router.push("/stock")
     }
   },
   methods:{
@@ -70,7 +76,6 @@ export default {
         password:this.account.password
       }
       this.$store.dispatch("doLogin",submit)
-      this.$router.push("/stock")
     }
   }
 };

@@ -15,13 +15,8 @@ import Menu from "@/components/Core/Menu.vue";
 import Content from "@/components/Core/Content.vue";
 export default {
   name: "App",
-  mounted(){
-    this.$store.dispatch("restoreLogin",this.hlw)
-  },
-  data() {
-    return {
-      hlw:"Hello World"
-    }
+  mounted() {
+    this.$store.dispatch({ type: "restoreLogin" });
   },
   components:{
     Header,

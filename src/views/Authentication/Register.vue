@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import api from '@/services/api'
+
 export default {
   name: "Register",
   data() {
@@ -72,8 +74,8 @@ export default {
     switchBackToLogin() {
       this.$router.back();
     },
-    submit() {
-      alert(JSON.stringify(this.account));
+    async submit() {
+      await api.register(this.account)
     },
   },
 };

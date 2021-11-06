@@ -43,7 +43,6 @@
       <!-- Table section -->
       <v-card class="mt-2">
         <v-data-table :search="search" :headers="headers" :items="mDataArray">
-          
           <template v-slot:top>
             <v-toolbar flat color="white">
               <v-toolbar-title>Stock</v-toolbar-title>
@@ -87,32 +86,46 @@
               <td class="text-xs-right">
                 <v-icon class="mr-2" @click="editItem(item)">edit</v-icon>
                 <span class="ma-1"></span>
-                <v-icon>delete</v-icon>
+                <v-icon @click="deleteItem(item)">delete</v-icon>
               </td>
             </tr>
           </template>
         </v-data-table>
       </v-card>
+      <v-dialog v-model="confirmDeleteDlg" max-width="290">
+        <v-card>
+          <v-card-title primary-title> Confirm Delete </v-card-title>
+          <v-card-text class="body">
+            Are you sure to delete? After deletion, it cannot be restored.
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text @click="confirmDeleteDlg = false">Cancle</v-btn>
+            <v-btn text @click="confirmDelete" color="error">Confirm</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
   </div>
 </template>
 
 <script>
 import StockCard from "@/components/Cards/StockCard.vue";
-import axios from "axios";
+import api from "@/services/api";
 export default {
   name: "Stock",
   components: {
     StockCard,
   },
-  mounted() {
-    axios.get("http://localhost:8081/api/v2/product").then((result) => {
-      this.mDataArray = result.data;
-    });
+  async mounted() {
+    // สมารถเรียกใช้ได้แม้จะอยู่คนละไฟล์ getProduct มาจาก ไฟล์ api_product
+    this.loadProduct()
   },
   data() {
     return {
       search: "",
+      selectedProductId: "",
+      confirmDeleteDlg: false,
       mDataArray: [],
       headers: [
         {
@@ -130,12 +143,24 @@ export default {
     };
   },
   methods: {
-    editItem(item){
-      this.$router.push(`/stock-edit/${item.id}`)
-    }
+    editItem(item) {
+      this.$router.push(`/stock-edit/${item.id}`);
+    },
+    deleteItem(item) {
+      this.selectedProductId = item.id;
+      this.confirmDeleteDlg = true;
+    },
+    async confirmDelete() {
+      await api.deleteProduct(this.selectedProductId);
+      this.confirmDeleteDlg = false;
+      this.loadProduct();
+    },
+    async loadProduct() {
+      let result = await api.getProduct();
+      this.mDataArray = result.data;
+    },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

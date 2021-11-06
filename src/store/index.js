@@ -1,8 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {
-  server
-} from "@/services/server.js";
+import { server } from "@/services/server.js";
 import api from "@/services/api.js";
 
 Vue.use(Vuex);
@@ -10,38 +8,34 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    username: ""
+    username: "",
   },
-  getters: { //getters เอาไว้เรียกใช้ข้อมูลใน state
+  getters: {
+    //getters เอาไว้เรียกใช้ข้อมูลใน state
     isLogin(state) {
-      return state.isLogin
+      return state.isLogin;
     },
     username(state) {
-      return state.username
-    }
-
+      return state.username;
+    },
   },
-  mutations: { //mutations เอาไว้เข้าถึงข้อมูลใน state
+  mutations: {
+    //mutations เอาไว้เข้าถึงข้อมูลใน state
     SET_LOGGED_IN(state) {
-      state.isLogin = true
+      state.isLogin = true;
     },
     SET_LOGGED_OUT(state) {
-      state.isLogin = false
+      state.isLogin = false;
     },
     SET_USERNAME(state, value) {
-      state.username = value
+      state.username = value;
     },
-
   },
   actions: {
-    doLogin({
-      commit,
-      dispatch
-    }, {
-      username
-    }) {
-      let result = api.login({
-        username
+    async doLogin({ commit, dispatch }, { username, password }) {
+      let result = await api.login({
+        username,
+        password,
       });
       if (result == true) {
         // console.log(username)
@@ -51,22 +45,18 @@ export default new Vuex.Store({
         dispatch("doLogout", {});
       }
     },
-    doLogout({
-      commit
-    }) {
+    doLogout({ commit }) {
       api.logoff();
-      commit("SET_LOGGED_OUT")
-      commit("SET_USERNAME", "")
+      commit("SET_LOGGED_OUT");
+      commit("SET_USERNAME", "");
     },
-    restoreLogin({
-      commit
-    }) {
+    restoreLogin({ commit }) {
       if (api.isLoggedIn() == true) {
         let username = localStorage.getItem(server.USERNAME);
         commit("SET_LOGGED_IN");
-        commit("SET_USERNAME", username)
+        commit("SET_USERNAME", username);
       }
-    }
+    },
   },
   modules: {},
 });
