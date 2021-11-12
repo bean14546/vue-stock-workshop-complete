@@ -1,12 +1,19 @@
 <template>
   <div id="menu_for_root">
-    <v-navigation-drawer app absolute permanent>
+    <v-navigation-drawer
+      app
+      absolute
+      permanent
+      dark
+      src="@/assets/background.jpg"
+    >
       <router-link to="/stock">
         <v-img src="../../assets/vue_display.jpg" width="100%" />
       </router-link>
       <v-list shaped>
         <v-list-item-group v-model="selectMenu" mandatory color="success">
           <v-list-item
+            class="tile"
             v-for="(item, index) in menus"
             :key="index"
             link
@@ -34,7 +41,9 @@
 export default {
   name: "Menu_for_root",
   mounted() {
-    this.selectMenu = this.menus.findIndex((menu) => menu.path == this.$route.path)
+    this.selectMenu = this.menus.findIndex(
+      (menu) => menu.path == this.$route.path
+    );
   },
   methods: {
     onClickMenu(path) {
@@ -74,4 +83,23 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.tile{
+  color: white;
+}
+.tile:hover{
+  background: green;
+}
+.tile:active{
+  background: #05ab71;
+}
+
+.v-list-item-group .v-list-item--active {
+    color: white !important; /* !important คือ property ที่ใช้สำหรับการ override หมายถึง ตัวนี้สำคัญที่สุด ต้องแสดงตัวนี้เท่านั้น */
+}
+
+
+.theme--dark.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+    opacity: 0.7;
+}
+</style>

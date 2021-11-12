@@ -1,0 +1,1 @@
+.tile{color:#fff}.tile:hover{background:green}.tile:active{background:#05ab71}.v-list-item-group .v-list-item--active{color:#fff!important /* !important คือ property ที่ใช้สำหรับการ override หมายถึง ตัวนี้สำคัญที่สุด ต้องแสดงตัวนี้เท่านั้น */}.theme--dark.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){opacity:.7}.small{max-width:600px;margin:150px auto}

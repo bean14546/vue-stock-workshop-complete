@@ -6,6 +6,7 @@ import Stock from '../views/Stock/Stock.vue';
 import StockCreate from '../views/Stock/StockCreate.vue';
 import StockEdit from '../views/Stock/StockEdit.vue';
 import Report from '../views/Report/Report.vue';
+import About from '../views/About/About.vue';
 Vue.use(VueRouter);
 
 const routes = [{
@@ -39,6 +40,11 @@ const routes = [{
     component: Report
   },
   {
+    path: "/about",
+    name: "About",
+    component: About
+  },
+  {
     path: "/", // หาก path ที่ใส่มา เป็น / จะ redirect เป็น /login อัตโนมัต
     redirect: "/login"
   },
@@ -48,9 +54,10 @@ const routes = [{
   }
 ];
 
+// user ต้องการไปที่ไหนมันจะไปที่นั่น โดยการเช็ค history ใช้ร่วมกับ fallback ตอน build
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
+  base: process.env.BASE_URL, // path ปัจจุบันอยู่ที่ไหน หรือ path ตั้งต้นคืออะไร มาจากไฟล์ vue.config.js
   routes,
 });
 
